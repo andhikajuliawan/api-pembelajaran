@@ -19,7 +19,16 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+//Get Data
 $router->get('/index', 'ExampleController@index');
+// Get Category
+$router->get('/categories', 'ExampleController@categories');
+// Get Data by Category
+$router->get('/categories/{id}', 'ExampleController@category_index');
+// Get Data by Status
+$router->get('/status/{id}', 'ExampleController@status_index');
+
+// Read, Update, Delete Data
 $router->post('/create', 'ExampleController@create');
-$router->put('/update/{id}', 'ExampleController@update');
-$router->delete('/delete/{id}', 'ExampleController@delete');
+$router->post('/update/{id}', 'ExampleController@update');
+$router->post('/delete/{id}', 'ExampleController@delete');

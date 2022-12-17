@@ -11,9 +11,9 @@ class Notes extends Model
 
     protected $fillable = ['title', 'content', 'date', 'status', 'category'];
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Categories', 'category');
+        return $this->belongsTo('App\Models\Category', 'category');
     }
     public function status()
     {

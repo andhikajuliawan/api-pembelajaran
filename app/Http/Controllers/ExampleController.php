@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Notes;
 use Illuminate\Http\Request;
 
@@ -18,11 +20,40 @@ class ExampleController extends Controller
 
     public function index()
     {
-        $notes_query = Notes::with(['categories', 'status']);
+        $notes_query = Notes::with(['category', 'status']);
         $notes = $notes_query->get();
 
         return response()->json([
-            'notes' => $notes,
+            'notes' => $notes
+        ], 200);
+    }
+
+    public function categories()
+    {
+        $categories = Category::all();
+
+        return response()->json([
+            'categories' => $categories,
+        ], 200);
+    }
+
+    public function category_index($id)
+    {
+        $category_query = Notes::with(['category', 'status'])->where('category', $id);
+        $category_index = $category_query->get();
+
+        return response()->json([
+            'Category' => $category_index,
+        ], 200);
+    }
+
+    public function status_index($id)
+    {
+        $status_query = Notes::with(['category', 'status'])->where('status', $id);
+        $status_index = $status_query->get();
+
+        return response()->json([
+            'Status' => $status_index,
         ], 200);
     }
 
